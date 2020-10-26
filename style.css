@@ -1,0 +1,27 @@
+header{
+padding:0;
+font-weight: bold;
+box-sizing: border-box;
+text-align: center
+}
+.jumbotron{
+  padding: 0;
+  margin: 0;
+}
+header h4{
+  font-weight: bold;
+  padding: 0;
+}
+
+label{
+  padding-right: 5px;
+}
+
+#todayWeatherCard{
+  border: 3px solid black;
+ }
+
+.container-fluid{
+  width: 90%;
+}
+

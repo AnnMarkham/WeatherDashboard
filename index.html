@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+
+  <title>WeatherDashboard</title>
+</head>
+
+<body>
+
+  <body>
+    <header class="jumbotron col-12 col-md bg-dark text-light">
+      <h4 class="display-3">Weather Dashboard</h4>
+    </header>
+
+
+    <div class="container-fluid" id="dashBoard">
+
+      <div class="row">
+        <div class="col-4">
+          <form class="form-inline" id="searchForm">
+            <label class="form-label" for="searchLabel">Search for a City:</label>
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+        </div>
+
+        <div class="col-8" id="todayWeatherCard">
+
+          <!--create card to hold  Header wtith city and date, -->
+          <!-- 4 additional rows inside card for temperature: humidity: wind speed: and uv index: colored badge with number -->
+          <!-- badge color for uv index based on favorable, moderate, severe-->
+        </div>
+      </div>
+
+      <div class="row" id="row2">
+        <div class="col-4" id="row2Col2">
+          <section class="historyContainer">
+            <ul class="cityHistory"></ul>
+          </section>
+        </div>
+
+
+
+      </div>
+
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+      <script src="script.js"></script>
+
+  </body>
+
+
+</html>
