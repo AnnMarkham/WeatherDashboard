@@ -1,11 +1,12 @@
-var getCityWeather = function () {
+var getCityWeather = function (city) {
   //format the weather api url
-  var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=c5f163a6903bc47e2936fd40702fea5f"
+  var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + ",us&APPID=c5f163a6903bc47e2936fd40702fea5f"
 
   //make a request to the url
   fetch(apiUrl).then(function (response) {
     response.json().then(function (data) {
       console.log(data);
+
     });
   });
 };
