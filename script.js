@@ -1,14 +1,27 @@
+var getCityWeather = function () {
+  //format the weather api url
+  var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=c5f163a6903bc47e2936fd40702fea5f"
 
+  //make a request to the url
+  fetch(apiUrl).then(function (response) {
+    response.json().then(function (data) {
+      console.log(data);
+    });
+  });
+};
 
 var searchFormEl = document.querySelector("#searchForm");
-var searchInputEl = document.querySelector("#search");
+var searchInputEl = document.querySelector("#city");
 
 var formSubmitHandler = function (event) {
-  event.preventDefault();
-  console.log(event);
-  //add details about what this function will do in addition to preventing default
-  //ie add cityname to history
-  //search for cityname in weather api
+  event.preventDefault();//prevents browser from sending info to url.  need to create a way to do this separately, or figure out how to connect this to submit request for weather Api
+  var city = searchInputEl.value.trim();
+  if (city) {
+    getCityWeather(city);
+    searchInputEl.value = "";
+  }
+  else
+    alert("Please enter a valid US city name")
 };
 
 searchFormEl.addEventListener("submit", formSubmitHandler);
