@@ -16,50 +16,25 @@
 </head>
 
 <body>
+  <header class="jumbotron col-12 col-md bg-dark text-light">
+    <h4 class="display-3">Weather Dashboard</h4>
+  </header>
 
-  <body>
-    <header class="jumbotron col-12 col-md bg-dark text-light">
-      <h4 class="display-3">Weather Dashboard</h4>
-    </header>
-
-
-    <div class="container-fluid" id="dashBoard">
-
-      <div class="row">
-        <div class="col-4">
-
-          <div class="input-group form-inline" id="searchForm">
-            <label class="form-label" for="city">Search for a City:</label>
-            <input type="text" class="form-input" placeholder="Search">
-            <div class="input-group-append">
-              <button class="btn btnPrimary" id="searchBtn" type="submit">
-                <i class="fas fa-search"></i>
-              </button>
-
-            </div>
-
-            <ul class="list-group searchHistory"></ul>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="col-8">
-      <div class="todayCard" id="todayWeatherCard">
-      </div>
-
-    </div>
+  <div class="row">
+    <div class="col-4">
+      <form class="form-inline" id="searchForm">
+        <label class="form-label" for="city">Search for a City:</label>
+        <input name="city" id="city" class="form-input mr-sm-2" type="text" placeholder="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          <i class="fas fa-search"></i>
+        </button>
 
 
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="script.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="script.js"></script>
 
-  </body>
+</body>
 
 
 </html>
