@@ -20,19 +20,48 @@
     <h4 class="display-3">Weather Dashboard</h4>
   </header>
 
-  <div class="row">
-    <div class="col-4">
+  <!--search input and button-->
+  <div class="row" id="row1">
+    <div class="col-12 col-md-4" id="row1Col1">
       <form class="form-inline" id="searchForm">
         <label class="form-label" for="city">Search for a City:</label>
         <input name="city" id="city" class="form-input mr-sm-2" type="text" placeholder="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
           <i class="fas fa-search"></i>
         </button>
+      </form>
+    </div>
+
+    <!--place for today's weather-->
+    <div class="col-8" id="row1Col2">
+      <div class="todayCard">
+        <h4 class="card-header">Today's Weather: <span id="searchedCity"></span></h4>
+        <div class="todayCardBody">
+          <table class="table"></table>
+          <tbody></tbody>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="row" id="row2">
+    <!-- place for 5day forecast-->
+    <div class="col-12 col-md-4">
+      <div id="historyBox" class="list-group">
+        <h4 class="historyHeader">Search History</h4>
+      </div>
+    </div>
+
+  </div>
 
 
 
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="script.js"></script>
+
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="script.js"></script>
 
 </body>
 

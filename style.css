@@ -17,18 +17,10 @@ label{
   padding-right: 5px;
 }
 
-#todayWeatherCard{
-  border: 3px solid black;
- }
-
 .container-fluid{
   width: 90%;
 }
 
 .btn{
   border:solid;
-}
-
-ul{
-  border: solid;
 }
