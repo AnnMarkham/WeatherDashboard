@@ -27,36 +27,37 @@
 
       <div class="row">
         <div class="col-4">
-          <form class="form-inline" id="searchForm">
+
+          <div class="input-group form-inline" id="searchForm">
             <label class="form-label" for="city">Search for a City:</label>
-            <input name="city" id="city" class="form-input mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-              <i class="fas fa-search"></i>
-            </button>
-          </form>
+            <input type="text" class="form-input" placeholder="Search">
+            <div class="input-group-append">
+              <button class="btn btnPrimary" id="searchBtn" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+
+            </div>
+
+            <ul class="list-group searchHistory"></ul>
+
+          </div>
+
         </div>
-
-        <div class="col-8" id="todayWeatherCard">
-
-          <!--create card to hold  Header wtith city and date, -->
-          <!-- 4 additional rows inside card for temperature: humidity: wind speed: and uv index: colored badge with number -->
-          <!-- badge color for uv index based on favorable, moderate, severe-->
-        </div>
-      </div>
-
-      <div class="row" id="row2">
-        <div class="col-4" id="row2Col2">
-          <section class="historyContainer">
-            <ul class="cityHistory"></ul>
-          </section>
-        </div>
-
-
 
       </div>
 
-      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-      <script src="script.js"></script>
+    </div>
+
+    <div class="col-8">
+      <div class="todayCard" id="todayWeatherCard">
+      </div>
+
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="script.js"></script>
 
   </body>
 
