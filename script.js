@@ -1,7 +1,5 @@
 var searchFormEl = document.querySelector("#searchForm");
 var searchInputEl = document.querySelector("#city");
-var today = moment().format("dddd, MMMM Do - YYYY");
-
 
 
 var getCityWeather = function (city) {
@@ -17,16 +15,15 @@ var getCityWeather = function (city) {
       var lon = data.coord.lon;
       console.log(lon);
 
-      var todayIcon = data.weather[0].icon;
+      var todayIcon = data.weather[0].icon
       console.log("icon:", todayIcon);
 
 
-
-      // $("#currentDay").text(today);
-      // $(".today").append("<row><h3>Today's Weather</th>" + currentDate + "</row>");
       $(".card-header").text(data.name)
-      //  + currentDate)
 
+      $(".today-card-text").append("<li> Temp: " + data.main.temp + " Degrees F" + "</li>")
+      $(".today-card-text").append("<li> Humidity: " + data.main.humidity + " %" + "</li>")
+      $(".today-card-text").append("<li> Wind Speed: " + data.wind.speed + "MPH" + "</li>")
 
 
       fetch("http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=c5f163a6903bc47e2936fd40702fea5f")
@@ -36,17 +33,16 @@ var getCityWeather = function (city) {
             var uvIndex = UVdata.value;
             console.log(uvIndex);
 
-            // if (uvIndex < 3) {
-            //   $(td).addClass("badge badge-success");
-            // }
-            // else if (uvIndex > 7) {
-            //   $(td).addClass("badge badge-danger")
-            // }
-            // else {
-            //   $(td).addClass("badge badge-warning")
-            // }
+            $(".badge").text(uvIndex)
 
-            // tbody.append("<tr><th>UV Index:</th><td>" + uvIndex + "</td></tr>");
+            if (uvIndex < 3) {
+              $(".badge").addClass("badge-success");
+            }
+            else if (uvIndex > 7) {
+              $(".badge").addClass("badge-danger")
+            }
+            else $(".badge").addClass("badge-warning")
+
 
 
           })
