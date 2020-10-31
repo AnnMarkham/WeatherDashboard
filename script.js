@@ -2,6 +2,9 @@ var searchFormEl = document.querySelector("#searchForm");
 var searchInputEl = document.querySelector("#city");
 
 
+
+
+
 var getCityWeather = function (city) {
 
   var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&APPID=c5f163a6903bc47e2936fd40702fea5f"
@@ -18,10 +21,15 @@ var getCityWeather = function (city) {
       var todayIcon = data.weather[0].icon
       console.log("icon:", todayIcon);
 
+      var todayTemp = data.main.temp;
+      todayTemp = Math.round(todayTemp)
+      console.log(todayTemp)
 
+      // $(".currentDate").text(currentDate)
       $(".card-header").text(data.name)
+      $(".todayIcon").attr("src", "http://openweathermap.org/img/wn/" + todayIcon + "@2x.png")
 
-      $(".today-card-text").append("<li> Temp: " + data.main.temp + " Degrees F" + "</li>")
+      $(".today-card-text").append("<li> Temp: " + todayTemp + " Degrees F" + "</li>")
       $(".today-card-text").append("<li> Humidity: " + data.main.humidity + " %" + "</li>")
       $(".today-card-text").append("<li> Wind Speed: " + data.wind.speed + "MPH" + "</li>")
 
