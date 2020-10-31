@@ -16,4 +16,7 @@ header h4{
 .container-fluid{
 margin-left: 40px;
 }
-
+.badge{
+  border: solid;
+color: orange;
+}
