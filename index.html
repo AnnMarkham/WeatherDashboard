@@ -21,7 +21,7 @@
     </header>
 
 
-    <div class="container">
+    <div class="container-fluid m-0 mr-0">
 
       <div class="row" id="row1">
         <div class="col-12 col-md-3" id="row1Col1">
@@ -42,7 +42,7 @@
         </div>
 
         <!--place for today's weather-->
-        <div class="card col sm-9">
+        <div class="card col sm-12">
           <div class="card-body">
             <h5 class="card-title">Today’s Weather</h5>
             <h6 class="card-header"></h6>
@@ -51,41 +51,26 @@
             <a href="#" class="badge"></a>
           </div>
 
-
-
-
-
-          <!-- <div class="col-sm-9" id="todayWeather">
-          <div class="todayCard">
-            <h3 class="row" id="currentDay"></h3>
-            <h4 class=" row card-header"></h4>
-            <div class=" row todayCardBody">
-              <div class="col-sm-9 todayList list-group"></div>
-            </div>
-          </div>
-        </div> -->
-
           <!-- place for 5day forecast-->
 
-          <div class="col-sm-3"></div>
-          <div class="col-sm-9 ">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-12 ">
             <h4>5 Day Forecast</h4>
-            <div class="d-flex flex-row justify-content-center forecastGroup card-group">
+            <div class="d-flex flex-row forecastGroup card-group">
 
-              <div class="card" id="cardDay1">
+              <div class="forecastCard card">
                 <div class="card-body">
-                  <h5 class="card-title">Card Day 1</h5>
-                  <p>PlaceHolder for Weather Icon</p>
-                  <p class="card-text">Temp:<span id="tempDay1"></span></p>
-                  <p class="card-text">Humidity: <span id="humidityDay1"></span></p>
-
+                  <h5 class="forecastTitle card-title">Today's Date</h5>
+                  <img class="forecastIcon"></img>
+                  <ul class="forecast-card-text list-group list-unstyled">
+                  </ul>
                 </div>
               </div>
 
-              <div class="card" id="cardDay2">
+              <!-- <div class="card" id="cardDay2">
                 <div class="card-body">
                   <h5 class="card-title">Card Day 2</h5>
-                  <p>PlaceHolder for Weather Icon</p>
+                  <a class="forecastIcon">PlaceHolder for Weather Icon</a>
                   <p class="card-text">Temp:<span id="tempDay2"></span></p>
                   <p class="card-text">Humidity:<span id="humidityDay2"></span></p>
 
@@ -117,10 +102,10 @@
                   <h5 class="card-title">Card Day 5</h5>
                   <p>PlaceHolder for Weather Icon</p>
                   <p class="card-text">Temp:<span id="tempDay5"></span></p>
-                  <p class="card-text">Humidity:<span id="humidityDay5"></span></p>
+                  <p class="card-text">Humidity:<span id="humidityDay5"></span></p> -->
 
-                </div>
-              </div>
+              <!-- </div>
+              </div> -->
             </div>
           </div>
 
@@ -128,16 +113,11 @@
 
       </div>
 
+    </div>
 
 
-
-
-
-
-
-
-      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-      <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="script.js"></script>
 
   </body>
 
