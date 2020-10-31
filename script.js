@@ -1,3 +1,6 @@
+
+
+
 var getCityWeather = function (city) {
   var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&APPID=c5f163a6903bc47e2936fd40702fea5f"
   //make a request to the url
@@ -29,6 +32,3 @@ var formSubmitHandler = function (event) {
 };
 
 searchFormEl.addEventListener("submit", formSubmitHandler);
-
-
-

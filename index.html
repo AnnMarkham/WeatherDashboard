@@ -1,85 +1,132 @@
-<!DOCTYPE html>
-<html lang="en">
+<<!DOCTYPE html>
+  <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css" />
 
-  <title>WeatherDashboard</title>
-</head>
+    <title>WeatherDashboard</title>
+  </head>
 
-<body>
-  <header class="jumbotron col-12 col-md bg-dark text-light">
-    <h4 class="display-3">Weather Dashboard</h4>
-  </header>
+  <body>
+    <header class="jumbotron col-12 col-md bg-dark text-light">
+      <h4 class="display-3">Weather Dashboard</h4>
+    </header>
 
-  <div class="container-fluid"></div>
 
-  <!--search-->
-  <div class="row" id="row1">
-    <div class="col-12 col-md-4" id="row1Col1">
-      <form class="form-inline" id="searchForm">
-        <label class="form-label" for="city">Search for a City:</label>
-        <input name="city" id="city" class="form-input mr-sm-2" type="text" placeholder="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" id="searchBtn" type="submit">
-          <i class="fas fa-search"></i>
-        </button>
-      </form>
-    </div>
+    <div class="container">
 
-    <!--place for today's weather-->
-    <div class="col-8" id="row1Col2">
-      <div class="todayCard">
-        <h4 class="card-header"></h4>
-        <div class="todayCardBody">
-          <table class="table">
-            <tbody></tbody>
-          </table>
+      <div class="row" id="row1">
+        <div class="col-12 col-md-3" id="row1Col1">
+          <!--search-->
+          <form class="form-inline" id="searchForm">
+            <label class="form-label" for="city">Search for a City:</label>
+            <input name="city" id="city" class="form-input mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" id="searchBtn" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+          <!--history-->
+          <div id="historyBox" class="list-group">
+            <h4 class="historyHeader">Search History</h4>
+          </div>
         </div>
+
+        <!--place for today's weather-->
+
+        <div class="col-sm-9" id="todayWeather">
+          <div class="todayCard">
+            <h4 class="card-header">
+            </h4>
+            <div class="todayCardBody">
+              <table class="table">
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- place for 5day forecast-->
+
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
+          <h4>5 Day Forecast</h4>
+          <div class="row forecastGroup card-group">
+
+            <div class="card" id="cardDay1">
+              <div class="card-body">
+                <h5 class="card-title">Card Day 1</h5>
+                <p>PlaceHolder for Weather Icon</p>
+                <p class="card-text">Temp:<span id="tempDay1"></span></p>
+                <p class="card-text">Humidity: <span id="humidityDay1"></span></p>
+
+              </div>
+            </div>
+
+            <div class="card" id="cardDay2">
+              <div class="card-body">
+                <h5 class="card-title">Card Day 2</h5>
+                <p>PlaceHolder for Weather Icon</p>
+                <p class="card-text">Temp:<span id="tempDay2"></span></p>
+                <p class="card-text">Humidity:<span id="humidityDay2"></span></p>
+
+              </div>
+            </div>
+
+            <div class="card" id="cardDay3">
+              <div class="card-body">
+                <h5 class="card-title">Card Day 3</h5>
+                <p>PlaceHolder for Weather Icon></p>
+                <p class="card-text">Temp:<span id="tempDay3"></span></p>
+                <p class="card-text">Humidity:<span id="humidityDay3"></span></p>
+
+              </div>
+            </div>
+
+            <div class="card" id="cardDay4">
+              <div class="card-body">
+                <h5 class="card-title">Card Day 4</h5>
+                <p>PlaceHolder for Weather Icon</p>
+                <p class="card-text">Temp:<span id="tempDay4"></span></p>
+                <p class="card-text">Humidity:<span id="humidityDay4"></span></p>
+
+              </div>
+            </div>
+
+            <div class="card" id="cardDay5">
+              <div class="card-body">
+                <h5 class="card-title">Card Day 5</h5>
+                <p>PlaceHolder for Weather Icon</p>
+                <p class="card-text">Temp:<span id="tempDay5"></span></p>
+                <p class="card-text">Humidity:><span id="humidityDay5"></span></p>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
       </div>
 
-    </div>
-
-  </div>
-
-  <div class="row" id="row2">
-
-    <!--container for search history-->
-    <div class="col-12 col-md-4">
-      <div id="historyBox" class="list-group">
-        <h4 class="historyHeader">Search History</h4>
-      </div>
-    </div>
 
 
-    <!-- place for 5day forecast-->
-    <div class="forecastBox col-8 d-flex justify-content-around">
-      <div class="cardDay1">
-        <h5>Day1</h5>
-      </div>
-
-      <div class="cardDay1">
-        <h5>Day2</h5>
-      </div>
-    </div>
-
-  </div>
 
 
-  </div>
 
 
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="script.js"></script>
-
-</body>
 
 
-</html>
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+      <script src="script.js"></script>
+
+  </body>
+
+
+  </html>
