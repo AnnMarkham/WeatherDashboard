@@ -13,14 +13,7 @@ header h4{
   padding: 0;
 }
 
-label{
-  padding-right: 5px;
-}
-
 .container-fluid{
-  width: 90%;
+margin-left: 40px;
 }
 
-.btn{
-  border:solid;
-}

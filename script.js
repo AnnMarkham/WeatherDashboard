@@ -1,11 +1,13 @@
 var getCityWeather = function (city) {
-  var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&APPID=c5f163a6903bc47e2936fd40702fea5f"
+  var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + ",us&APPID=c5f163a6903bc47e2936fd40702fea5f"
   //make a request to the url
   fetch(apiUrl).then(function (response) {
     response.json().then(function (data) {
-      console.log(data);
+
+      console.log("Name:", data.name)
+      $(".card-header").text(data.name)
     })
-  });
+  })
 };
 var searchFormEl = document.querySelector("#searchForm");
 var searchInputEl = document.querySelector("#city");
@@ -20,14 +22,7 @@ var formSubmitHandler = function (event) {
     alert("Please enter a valid US city name")
 };
 
-
-
-
-
-
-
-
-
-
-
 searchFormEl.addEventListener("submit", formSubmitHandler);
+
+
+
