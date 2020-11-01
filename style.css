@@ -15,4 +15,8 @@ header h4{
   font-weight: bold;
   padding: 0;
 }
+.forecastGroup{
+  border: solid;
+}
+
 

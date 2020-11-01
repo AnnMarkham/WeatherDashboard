@@ -1,9 +1,12 @@
 var searchFormEl = document.querySelector("#searchForm");
 var searchInputEl = document.querySelector("#city");
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, "0");
+var mm = String(today.getMonth() + 1).padStart(2, "0");
+var yyyy = today.getFullYear();
+today = mm + "/" + dd + "/" + yyyy;
 
-
-
-
+console.log("Today:", today);
 
 var getCityWeather = function (city) {
 
@@ -58,7 +61,6 @@ var getCityWeather = function (city) {
           response.json().then(function (forecastData) {
             console.log("Forecast Data: ", forecastData);
 
-
             var i = 0;
 
             var date = forecastData.list[i].dt_txt;
@@ -77,19 +79,17 @@ var getCityWeather = function (city) {
 
             var forecastIcon = forecastData.list[i].weather[i].icon;
             console.log("Forecast Icon", forecastIcon);
+
             $(".forecastIcon").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
 
             $(".forecastTitle").text(date)
 
-            $(".forecast-card-text").append("<li> Temp: " + forecastTemp + " Degrees F" + "</li>")
-            $(".forecast-card-text").append("<li> Humidity: " + forecastData.list[i].main.humidity + " %" + "</li>")
-
+            $(".forecastTemp").append("Temp: " + forecastTemp + " Degrees F")
+            $(".forecastHumidity").append(" Humidity: " + forecastData.list[i].main.humidity + " %")
 
           })
         })
-
     })
-
 
   })
 };
