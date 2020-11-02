@@ -56,37 +56,39 @@ var getCityWeather = function (city) {
           })
 
         })
+
       fetch("http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&cnt=120&units=imperial&APPID=c5f163a6903bc47e2936fd40702fea5f")
         .then(function (response) {
           response.json().then(function (forecastData) {
             console.log("Forecast Data: ", forecastData);
 
-            var i = 0;
+            for (var i = 0; i < forecastData.list.length; i++) {
 
-            var date = forecastData.list[i].dt_txt;
-            console.log("Forecast Date: ", date, typeof date);
+              var date = forecastData.list[i].dt_txt;
+              console.log("Forecast Date: ", date, typeof date);
 
-            date = date.substring(0, date.length - 8);
-            console.log("Forecast Date: ", date);
+              date = date.substring(0, date.length - 8);
+              console.log("Forecast Date: ", date);
 
-            var forecastTemp = forecastData.list[i].main.temp;
+              var forecastTemp = forecastData.list[i].main.temp;
 
-            forecastTemp = Math.round(forecastTemp);
-            console.log("Forecast Temp: ", forecastTemp, typeof forecastTemp);
+              forecastTemp = Math.round(forecastTemp);
+              console.log("Forecast Temp: ", forecastTemp, typeof forecastTemp);
 
-            var forecastHumidity = forecastData.list[i].main.humidity;
-            console.log("Forecast Humidity:", forecastHumidity);
+              var forecastHumidity = forecastData.list[i].main.humidity;
+              console.log("Forecast Humidity:", forecastHumidity);
 
-            var forecastIcon = forecastData.list[i].weather[i].icon;
-            console.log("Forecast Icon", forecastIcon);
+              var forecastIcon = forecastData.list[i].weather[0].icon;
+              console.log("Forecast Icon", forecastIcon);
 
-            $(".forecastIcon").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
+              $(".forecastIcon").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
 
-            $(".forecastTitle").text(date)
+              $(".forecastTitle").text(date)
 
-            $(".forecastTemp").append("Temp: " + forecastTemp + " Degrees F")
-            $(".forecastHumidity").append(" Humidity: " + forecastData.list[i].main.humidity + " %")
+              $(".forecastTemp").append("Temp: " + forecastTemp + " Degrees F")
+              $(".forecastHumidity").append(" Humidity: " + forecastData.list[i].main.humidity + " %")
 
+            }
           })
         })
     })
