@@ -1,6 +1,4 @@
-*{
-  margin:0;
-}
+
 header{
 padding:0;
 font-weight: bold;
@@ -19,4 +17,7 @@ header h4{
   border: solid;
 }
 
-
+img{
+  background-color: #dfeff7;
+   
+}

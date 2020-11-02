@@ -5,15 +5,19 @@ var dd = String(today.getDate()).padStart(2, "0");
 var mm = String(today.getMonth() + 1).padStart(2, "0");
 var yyyy = today.getFullYear();
 today = mm + "/" + dd + "/" + yyyy;
+var cityListEl = document.getElementById("cityHistory");
+var cityItem = document.getElementById("historyItem");
+var todayCardData = document.getElementById("todayCardData");
 
-console.log("Today:", today);
 
 var getCityWeather = function (city) {
+  console.log("city:", city, typeof city);
 
   var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&APPID=c5f163a6903bc47e2936fd40702fea5f"
   //make a request to the url
   fetch(apiUrl).then(function (response) {
     response.json().then(function (data) {
+      $("#todayCardData").empty();
 
       console.log(data)
       var lat = data.coord.lat;
@@ -28,13 +32,19 @@ var getCityWeather = function (city) {
       todayTemp = Math.round(todayTemp)
       console.log(todayTemp)
 
-      // $(".currentDate").text(currentDate)
-      $(".card-header").text(data.name)
+
+      $(".card-header").text(data.name + "     " + today)
       $(".todayIcon").attr("src", "http://openweathermap.org/img/wn/" + todayIcon + "@2x.png")
 
       $(".today-card-text").append("<li> Temp: " + todayTemp + " Degrees F" + "</li>")
       $(".today-card-text").append("<li> Humidity: " + data.main.humidity + " %" + "</li>")
       $(".today-card-text").append("<li> Wind Speed: " + data.wind.speed + "MPH" + "</li>")
+
+      var historyItem = $("#historyItem");
+      historyItem.text(data.name);
+      $("#cityHistory").append(historyItem);
+      historyItem.attr("href", data.name);
+
 
 
       fetch("http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=c5f163a6903bc47e2936fd40702fea5f")
@@ -111,31 +121,30 @@ var getCityWeather = function (city) {
                 $(".forecastTemp5").text("Temp: " + forecastTemp + " Degrees F")
                 $(".forecastHumidity5").text(" Humidity: " + forecastHumidity + " %")
               }
-
-
             }
-            // else if (i = 7) {
-            //   $(".forecastIcon2").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
-
-            //   $(".forecastTitle2").text(date)
-
-            //   $(".forecastTemp2").text("Temp: " + forecastTemp + " Degrees F")
-            //   $(".forecastHumidity2").append(" Humidity: " + forecastData.list[i].main.humidity + " %")
-            // }
-
-
-
-
 
           })
         })
     })
 
   })
-};
+
+}
+
+var clickClass = function clickClass(event) {
+  event.preventDefault();
+  $("#historyItem").removeClass("active")
+  $("#historyItem") = $(this);
+  $("#todayCardData").empty()
+  $("#historyItem").addClass("active")
+
+  city = historyItem.text.trim();
+  getCityWeather(city);
+
+}
 
 var formSubmitHandler = function (event) {
-  event.preventDefault();//prevents browser from sending info to url.  need to create a way to do this separately, or figure out how to connect this to submit request for weather Api
+  event.preventDefault();
   var city = searchInputEl.value.trim();
   if (city) {
     getCityWeather(city);
@@ -146,3 +155,4 @@ var formSubmitHandler = function (event) {
 };
 
 searchFormEl.addEventListener("submit", formSubmitHandler);
+historyItem.addEventListener("click", clickClass)
