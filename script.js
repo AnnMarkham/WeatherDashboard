@@ -62,7 +62,7 @@ var getCityWeather = function (city) {
           response.json().then(function (forecastData) {
             console.log("Forecast Data: ", forecastData);
 
-            for (var i = 0; i < forecastData.list.length; i++) {
+            for (var i = 0; i < forecastData.list.length; i += 7) {
 
               var date = forecastData.list[i].dt_txt;
               console.log("Forecast Date: ", date, typeof date);
@@ -81,14 +81,52 @@ var getCityWeather = function (city) {
               var forecastIcon = forecastData.list[i].weather[0].icon;
               console.log("Forecast Icon", forecastIcon);
 
-              $(".forecastIcon").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
+              if (i === 0) {
+                $(".forecastIcon1").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
+                $(".forecastTitle1").text(date)
+                $(".forecastTemp1").text("Temp: " + forecastTemp + " Degrees F")
+                $(".forecastHumidity1").text(" Humidity: " + forecastHumidity + " %")
+              }
+              else if (i === 7) {
+                $(".forecastIcon2").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
+                $(".forecastTitle2").text(date)
+                $(".forecastTemp2").text("Temp: " + forecastTemp + " Degrees F")
+                $(".forecastHumidity2").text(" Humidity: " + forecastHumidity + " %")
+              }
+              else if (i === 14) {
+                $(".forecastIcon3").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
+                $(".forecastTitle3").text(date)
+                $(".forecastTemp3").text("Temp: " + forecastTemp + " Degrees F")
+                $(".forecastHumidity3").text(" Humidity: " + forecastHumidity + " %")
+              }
+              else if (i === 21) {
+                $(".forecastIcon4").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
+                $(".forecastTitle4").text(date)
+                $(".forecastTemp4").text("Temp: " + forecastTemp + " Degrees F")
+                $(".forecastHumidity4").text(" Humidity: " + forecastHumidity + " %")
+              }
+              else if (i === 28) {
+                $(".forecastIcon5").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
+                $(".forecastTitle5").text(date)
+                $(".forecastTemp5").text("Temp: " + forecastTemp + " Degrees F")
+                $(".forecastHumidity5").text(" Humidity: " + forecastHumidity + " %")
+              }
 
-              $(".forecastTitle").text(date)
-
-              $(".forecastTemp").append("Temp: " + forecastTemp + " Degrees F")
-              $(".forecastHumidity").append(" Humidity: " + forecastData.list[i].main.humidity + " %")
 
             }
+            // else if (i = 7) {
+            //   $(".forecastIcon2").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
+
+            //   $(".forecastTitle2").text(date)
+
+            //   $(".forecastTemp2").text("Temp: " + forecastTemp + " Degrees F")
+            //   $(".forecastHumidity2").append(" Humidity: " + forecastData.list[i].main.humidity + " %")
+            // }
+
+
+
+
+
           })
         })
     })
