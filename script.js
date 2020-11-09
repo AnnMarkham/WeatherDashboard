@@ -5,143 +5,147 @@ var dd = String(today.getDate()).padStart(2, "0");
 var mm = String(today.getMonth() + 1).padStart(2, "0");
 var yyyy = today.getFullYear();
 today = mm + "/" + dd + "/" + yyyy;
-var cityListEl = document.getElementById("cityHistory");
-var cityItem = document.getElementById("historyItem");
 var todayCardData = document.getElementById("todayCardData");
+var historyItem = ''
+var historyUL = $("#cityHistory");
+historyUL = [];
+var item;
 
+// if (localStorage.getItem("searchHistory")){
+//   historyItem=JSON.parse(localStorage.getItem("searchHistory"))
+// }
 
 var getCityWeather = function (city) {
-  console.log("city:", city, typeof city);
+  fetch("http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&APPID=c5f163a6903bc47e2936fd40702fea5f")
+    .then(function (response) {
+      response.json().then(function (data) {
+        $("#todayCardData").empty();
 
-  var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&APPID=c5f163a6903bc47e2936fd40702fea5f"
-  //make a request to the url
-  fetch(apiUrl).then(function (response) {
-    response.json().then(function (data) {
-      $("#todayCardData").empty();
+        console.log(data)
+        var lat = data.coord.lat;
+        console.log(lat);
+        var lon = data.coord.lon;
+        console.log(lon);
 
-      console.log(data)
-      var lat = data.coord.lat;
-      console.log(lat);
-      var lon = data.coord.lon;
-      console.log(lon);
+        var todayIcon = data.weather[0].icon
+        console.log("icon:", todayIcon);
 
-      var todayIcon = data.weather[0].icon
-      console.log("icon:", todayIcon);
-
-      var todayTemp = data.main.temp;
-      todayTemp = Math.round(todayTemp)
-      console.log(todayTemp)
+        var todayTemp = data.main.temp;
+        todayTemp = Math.round(todayTemp)
+        console.log(todayTemp)
 
 
-      $(".card-header").text(data.name + "     " + today)
-      $(".todayIcon").attr("src", "http://openweathermap.org/img/wn/" + todayIcon + "@2x.png")
+        $(".card-header").text(data.name + "     " + today)
+        $(".todayIcon").attr("src", "http://openweathermap.org/img/wn/" + todayIcon + "@2x.png")
 
-      $(".today-card-text").append("<li> Temp: " + todayTemp + " Degrees F" + "</li>")
-      $(".today-card-text").append("<li> Humidity: " + data.main.humidity + " %" + "</li>")
-      $(".today-card-text").append("<li> Wind Speed: " + data.wind.speed + "MPH" + "</li>")
+        $(".today-card-text").append("<li> Temp: " + todayTemp + " Degrees F" + "</li>")
+        $(".today-card-text").append("<li> Humidity: " + data.main.humidity + " %" + "</li>")
+        $(".today-card-text").append("<li> Wind Speed: " + data.wind.speed + "MPH" + "</li>")
 
-      var historyItem = $("#historyItem");
-      historyItem.text(data.name);
-      $("#cityHistory").append(historyItem);
-      historyItem.attr("href", data.name);
+        historyItem = $('<button class="list-group-item historyBtn" </button>');
+        historyItem.text(data.name);
+        historyItem.type = "button";
+        (historyItem).appendTo("#cityHistory");
+        console.log("HistoryItem:", historyItem, typeof historyItem);
 
 
+        fetch("http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=c5f163a6903bc47e2936fd40702fea5f")
+          .then(function (response) {
+            response.json().then(function (UVdata) {
+              console.log(UVdata);
+              var uvIndex = UVdata.value;
+              console.log(uvIndex);
 
-      fetch("http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=c5f163a6903bc47e2936fd40702fea5f")
-        .then(function (response) {
-          response.json().then(function (UVdata) {
-            console.log(UVdata);
-            var uvIndex = UVdata.value;
-            console.log(uvIndex);
+              $(".badge").text(uvIndex)
 
-            $(".badge").text(uvIndex)
+              if (uvIndex < 3) {
+                $(".badge").addClass("badge-success");
+              }
+              else if (uvIndex > 7) {
+                $(".badge").addClass("badge-danger")
+              }
+              else $(".badge").addClass("badge-warning")
+            })
 
-            if (uvIndex < 3) {
-              $(".badge").addClass("badge-success");
-            }
-            else if (uvIndex > 7) {
-              $(".badge").addClass("badge-danger")
-            }
-            else $(".badge").addClass("badge-warning")
           })
 
-        })
+        fetch("http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&cnt=120&units=imperial&APPID=c5f163a6903bc47e2936fd40702fea5f")
+          .then(function (response) {
+            response.json().then(function (forecastData) {
+              console.log("Forecast Data: ", forecastData);
 
-      fetch("http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&cnt=120&units=imperial&APPID=c5f163a6903bc47e2936fd40702fea5f")
-        .then(function (response) {
-          response.json().then(function (forecastData) {
-            console.log("Forecast Data: ", forecastData);
+              for (var i = 0; i < forecastData.list.length; i += 7) {
 
-            for (var i = 0; i < forecastData.list.length; i += 7) {
+                var date = forecastData.list[i].dt_txt;
+                console.log("Forecast Date: ", date, typeof date);
 
-              var date = forecastData.list[i].dt_txt;
-              console.log("Forecast Date: ", date, typeof date);
+                date = date.substring(0, date.length - 8);
+                console.log("Forecast Date: ", date);
 
-              date = date.substring(0, date.length - 8);
-              console.log("Forecast Date: ", date);
+                var forecastTemp = forecastData.list[i].main.temp;
 
-              var forecastTemp = forecastData.list[i].main.temp;
+                forecastTemp = Math.round(forecastTemp);
+                console.log("Forecast Temp: ", forecastTemp, typeof forecastTemp);
 
-              forecastTemp = Math.round(forecastTemp);
-              console.log("Forecast Temp: ", forecastTemp, typeof forecastTemp);
+                var forecastHumidity = forecastData.list[i].main.humidity;
+                console.log("Forecast Humidity:", forecastHumidity);
 
-              var forecastHumidity = forecastData.list[i].main.humidity;
-              console.log("Forecast Humidity:", forecastHumidity);
+                var forecastIcon = forecastData.list[i].weather[0].icon;
+                console.log("Forecast Icon", forecastIcon);
 
-              var forecastIcon = forecastData.list[i].weather[0].icon;
-              console.log("Forecast Icon", forecastIcon);
-
-              if (i === 0) {
-                $(".forecastIcon1").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
-                $(".forecastTitle1").text(date)
-                $(".forecastTemp1").text("Temp: " + forecastTemp + " Degrees F")
-                $(".forecastHumidity1").text(" Humidity: " + forecastHumidity + " %")
+                if (i === 0) {
+                  $(".forecastIcon1").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
+                  $(".forecastTitle1").text(date)
+                  $(".forecastTemp1").text("Temp: " + forecastTemp + " Degrees F")
+                  $(".forecastHumidity1").text(" Humidity: " + forecastHumidity + " %")
+                }
+                else if (i === 7) {
+                  $(".forecastIcon2").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
+                  $(".forecastTitle2").text(date)
+                  $(".forecastTemp2").text("Temp: " + forecastTemp + " Degrees F")
+                  $(".forecastHumidity2").text(" Humidity: " + forecastHumidity + " %")
+                }
+                else if (i === 14) {
+                  $(".forecastIcon3").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
+                  $(".forecastTitle3").text(date)
+                  $(".forecastTemp3").text("Temp: " + forecastTemp + " Degrees F")
+                  $(".forecastHumidity3").text(" Humidity: " + forecastHumidity + " %")
+                }
+                else if (i === 21) {
+                  $(".forecastIcon4").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
+                  $(".forecastTitle4").text(date)
+                  $(".forecastTemp4").text("Temp: " + forecastTemp + " Degrees F")
+                  $(".forecastHumidity4").text(" Humidity: " + forecastHumidity + " %")
+                }
+                else if (i === 28) {
+                  $(".forecastIcon5").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
+                  $(".forecastTitle5").text(date)
+                  $(".forecastTemp5").text("Temp: " + forecastTemp + " Degrees F")
+                  $(".forecastHumidity5").text(" Humidity: " + forecastHumidity + " %")
+                }
               }
-              else if (i === 7) {
-                $(".forecastIcon2").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
-                $(".forecastTitle2").text(date)
-                $(".forecastTemp2").text("Temp: " + forecastTemp + " Degrees F")
-                $(".forecastHumidity2").text(" Humidity: " + forecastHumidity + " %")
-              }
-              else if (i === 14) {
-                $(".forecastIcon3").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
-                $(".forecastTitle3").text(date)
-                $(".forecastTemp3").text("Temp: " + forecastTemp + " Degrees F")
-                $(".forecastHumidity3").text(" Humidity: " + forecastHumidity + " %")
-              }
-              else if (i === 21) {
-                $(".forecastIcon4").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
-                $(".forecastTitle4").text(date)
-                $(".forecastTemp4").text("Temp: " + forecastTemp + " Degrees F")
-                $(".forecastHumidity4").text(" Humidity: " + forecastHumidity + " %")
-              }
-              else if (i === 28) {
-                $(".forecastIcon5").attr("src", "http://openweathermap.org/img/wn/" + forecastIcon + "@2x.png")
-                $(".forecastTitle5").text(date)
-                $(".forecastTemp5").text("Temp: " + forecastTemp + " Degrees F")
-                $(".forecastHumidity5").text(" Humidity: " + forecastHumidity + " %")
-              }
-            }
 
+            })
           })
-        })
+
+
+      })
+
+
     })
-
+  $(".historyBtn").on("click", function () {
+    city = ("This", $(this).text());
+    getCityWeather(city);
   })
 
 }
 
-var clickClass = function clickClass(event) {
-  event.preventDefault();
-  $("#historyItem").removeClass("active")
-  $("#historyItem") = $(this);
-  $("#todayCardData").empty()
-  $("#historyItem").addClass("active")
 
-  city = historyItem.text.trim();
-  getCityWeather(city);
 
-}
+
+$(".historyBtn").click();
+
+
 
 var formSubmitHandler = function (event) {
   event.preventDefault();
@@ -155,4 +159,3 @@ var formSubmitHandler = function (event) {
 };
 
 searchFormEl.addEventListener("submit", formSubmitHandler);
-historyItem.addEventListener("click", clickClass)
